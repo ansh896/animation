@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rocket Launch Animation</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to top, #001f3f, #0074D9);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .rocket {
+      position: relative;
+      width: 60px;
+      height: 120px;
+      background: #ccc;
+      border-radius: 30px;
+      animation: launch 5s ease-in-out infinite;
+    }
+
+    .rocket::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 18px;
+      width: 24px;
+      height: 40px;
+      background: #ff4136;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .rocket::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: orange;
+      border-radius: 50%;
+      animation: fire 0.2s infinite alternate;
+    }
+
+    .smoke {
+      position: absolute;
+      bottom: 0;
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      animation: smoke 2s ease-in-out infinite;
+      filter: blur(4px);
+    }
+
+    @keyframes launch {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-120vh); }
+    }
+
+    @keyframes fire {
+      from { height: 20px; width: 20px; opacity: 1; }
+      to { height: 30px; width: 10px; opacity: 0.5; }
+    }
+
+    @keyframes smoke {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100px) scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rocket"></div>
+
+  <!-- Smoke clouds -->
+  <div class="smoke" style="left: 48%; animation-delay: 0s;"></div>
+  <div class="smoke" style="left: 52%; animation-delay: 0.5s;"></div>
+  <div class="smoke" style="left: 50%; animation-delay: 1s;"></div>
+
+</body>
+</html>
